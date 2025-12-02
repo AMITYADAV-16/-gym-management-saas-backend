@@ -8,7 +8,7 @@ This project is a centralized platform designed to bridge the gap between **Gym 
 Built with **Java Spring Boot**, it adheres to strict **RESTful API** standards and implements **State-of-the-Art Security** using JWT and Role-Based Access Control (RBAC).
 
 ## Tech Stack
-*   **Backend:** Java 17, Spring Boot 3
+*   **Backend:** Java 24, Spring Boot 3
 *   **Security:** Spring Security 6, JWT (JSON Web Tokens), BCrypt Encryption
 *   **Database:** PostgreSQL / MySQL (JPA & Hibernate)
 *   **Payments:** Razorpay Payment Gateway Integration
