@@ -65,7 +65,6 @@ public class RazorpayService {
 
         boolean isValid = true;
 
-
         if (isValid) {
             payment.setRazorpayPaymentId(paymentId);
             payment.setRazorpaySignature(signature);

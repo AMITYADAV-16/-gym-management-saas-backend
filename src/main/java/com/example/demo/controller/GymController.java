@@ -9,6 +9,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/gyms")
 public class GymController {
@@ -35,10 +38,16 @@ public ResponseEntity<Gym> createGym(@RequestBody GymRequest gymRequest){
         }
 
     }
+
+    @GetMapping
+    public ResponseEntity<List<Gym>> getAllGyms() {
+        return ResponseEntity.ok(gymService.getAllGyms());
+    }
+
     @GetMapping("/test")
-    @PreAuthorize("hasAuthority('ROLE_GYM_OWNER')")
+    @PreAuthorize("hasAuthority('ROLE_OWNER')")
     public ResponseEntity<String> testSecurity() {
+
         return ResponseEntity.ok("You have access!");
     }
 }
-

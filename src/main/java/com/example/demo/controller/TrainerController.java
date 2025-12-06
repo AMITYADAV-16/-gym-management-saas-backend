@@ -19,12 +19,12 @@ public class TrainerController {
 
 
     @PutMapping("/promote/{userId}")
-    @PreAuthorize("hasRole('OWNER')")
+    @PreAuthorize("hasRole('ROLE_OWNER')")
     public ResponseEntity<String> promoteToTrainer(@PathVariable Long userId) {
         User user = userRepo.findById(userId)
                 .orElseThrow(() -> new RuntimeException("User not found"));
 
-        user.setRole(Role.ROlE_TRAINER);
+        user.setRole(Role.ROLE_TRAINER);
         userRepo.save(user);
 
         return ResponseEntity.ok("User " + user.getFirstName() + " is now a Trainer!");

@@ -11,6 +11,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class GymServiceImpl implements GymService {
@@ -48,5 +49,9 @@ public class GymServiceImpl implements GymService {
         newGym.setLongitude(placeholderLon);
 
         return gymRepository.save(newGym);
+    }
+    @Override
+    public List<Gym> getAllGyms() {
+        return gymRepository.findAll();
     }
 }

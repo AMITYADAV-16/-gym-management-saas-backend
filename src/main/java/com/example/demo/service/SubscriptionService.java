@@ -5,6 +5,9 @@ import com.example.demo.model.Gym;
 import com.example.demo.repository.GymRepository;
 import com.example.demo.model.Subscription;
 import com.example.demo.repository.SubscriptionRepository;
+import com.example.demo.repository.UserRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +21,17 @@ public SubscriptionService(SubscriptionRepository subscriptionRepo,GymRepository
     this.subscriptionRepo = subscriptionRepo;
     this.gymRepo = gymRepo;
 }
-public Subscription createPlane (Long gymId, PlanRequest request){
+@Autowired
+private UserRepository userRepository;
+public Subscription createPlane (Long gymId,PlanRequest request){
     Gym gym = gymRepo.findById(gymId)
             .orElseThrow(() -> new RuntimeException("Gym not found"));
-Subscription plan = new Subscription();
+String currentUsername = SecurityContextHolder.getContext().getAuthentication().getName();
+
+if(!gym.getOwner().getEmail().equals(currentUsername)){
+    throw new RuntimeException("ACCESS DENIED: You do not own this gym!");
+}
+    Subscription plan = new Subscription();
 plan.setGym(gym);
 plan.setPlanName(request.getName());
 plan.setPrice(request.getPrice());
